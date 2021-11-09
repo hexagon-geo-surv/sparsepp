@@ -222,6 +222,9 @@ namespace sparsehash_internal
         return write_data_internal_for_ostream(fp, data, length);
     }
 
+// LEICA: Visual Studio 2008 for ARM doesn't distinguish between those template functions
+// and those defined for FILE*
+#if 0
     // ----- low-level I/O for custom streams ----
 
     // The INPUT type needs to support a Read() method that takes a
@@ -241,6 +244,7 @@ namespace sparsehash_internal
     {
         return static_cast<size_t>(fp->Write(data, length)) == length;
     }
+#endif
 
     // ----- low-level I/O: the public API ----
 
@@ -1096,7 +1100,10 @@ private:
             //     8     12   16  18 20 22 24 25 26   ...          32
             // ------------------------------------------------------
             SPP_CXX14_CONSTEXPR alloc_batch_size()
+// LEICA: VS 2008 can't default initialize an array but this is not necessary since the array is initialized in the body of the constructor
+#if 0
                 : data()
+#endif
             {
                 uint8_t group_sz          = SPP_GROUP_SIZE / 4;
                 uint8_t group_start_alloc = SPP_GROUP_SIZE / 8; //4;

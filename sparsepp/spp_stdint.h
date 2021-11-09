@@ -8,7 +8,9 @@
 #else
     #if defined(__FreeBSD__) || defined(__IBMCPP__) || defined(_AIX)
         #include <inttypes.h>
-    #else
+    // LEICA: stdint.h not provided in older versions of VS and defines are not needed in smartworx since they are provided
+    // by other headers
+    #elif !defined _MSC_VER
         #include <stdint.h>
     #endif
 #endif
