@@ -565,7 +565,7 @@
     #define SPP_POPCNT_CHECK  // slower when defined, but we have to check!
     // LEICA: ARM platform does not provide cpuid instruction
     #if defined _M_ARM
-        #define spp_cpuid(info, x) info[2] = 0
+        #define spp_cpuid(info, x) memset(info, sizeof(info), 0)
     #else
         #define spp_cpuid(info, x) __cpuid(info, x)
     #endif
