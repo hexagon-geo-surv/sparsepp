@@ -8,7 +8,8 @@
 #else
     #if defined(__FreeBSD__) || defined(__IBMCPP__) || defined(_AIX)
         #include <inttypes.h>
-    #else
+    // LEICA: stdint.h is not provided in older versions of VS
+    #elif _MSC_VER >= 1600
         #include <stdint.h>
     #endif
 #endif
