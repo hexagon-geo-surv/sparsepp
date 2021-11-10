@@ -563,7 +563,12 @@
     #include <intrin.h>                     // for __popcnt()
 
     #define SPP_POPCNT_CHECK  // slower when defined, but we have to check!
-    #define spp_cpuid(info, x)    __cpuid(info, x)
+    // LEICA: ARM platform does not provide cpuid instruction
+    #if defined _M_ARM
+        #define spp_cpuid(info, x) memset(info, sizeof(info), 0)
+    #else
+        #define spp_cpuid(info, x) __cpuid(info, x)
+    #endif
 
     #define SPP_POPCNT __popcnt
     #if (SPP_GROUP_SIZE == 64 && INTPTR_MAX == INT64_MAX)
